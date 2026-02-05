@@ -237,7 +237,9 @@ def fetch_lolbas_remote():
                             mitre_id = cmd.get('MitreID')
                             new_bin['mitre']['technique'] = mitre_id
                             new_bin['mitre']['name'] = cmd.get('MitreName', '')
-                            new_bin['mitre']['url'] = f"https://attack.mitre.org/techniques/{mitre_id}/"
+                            # Replace dot (.) with slash (/) for MITRE URL to work correctly
+                            mitre_url_id = mitre_id.replace('.', '/')
+                            new_bin['mitre']['url'] = f"https://attack.mitre.org/techniques/{mitre_url_id}/"
                     
                     # Process detection
                     for det in content.get('Detection', []):
