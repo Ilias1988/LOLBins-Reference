@@ -1,0 +1,6 @@
+# LOLBins Reference - Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# Required for update_db.py
+requests>=2.28.0
+pyyaml>=6.0

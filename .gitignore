@@ -1,0 +1,67 @@
+# ============================================
+# LOLBins Reference - Git Ignore
+# ============================================
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Local development
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# ============================================
+# Update Script Related
+# ============================================
+
+# Cloned repositories for update script
+GTFOBins.github.io/
+LOLBAS/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# Python virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# Python eggs
+*.egg
+*.egg-info/
