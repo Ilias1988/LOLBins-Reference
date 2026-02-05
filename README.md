@@ -22,7 +22,7 @@ A comprehensive, interactive reference for **Living off the Land Binaries** (LOL
 
 ## 🚀 Live Demo
 
-Visit: [https://yourusername.github.io/LOLBins-Reference](https://yourusername.github.io/LOLBins-Reference)
+Visit: [https://Ilias1988.github.io/LOLBins-Reference](https://Ilias1988.github.io/LOLBins-Reference)
 
 ## 📦 Categories
 
@@ -51,12 +51,12 @@ Visit: [https://yourusername.github.io/LOLBins-Reference](https://yourusername.g
 1. Fork this repository
 2. Go to Settings → Pages
 3. Set source to "main" branch
-4. Your site will be available at `https://yourusername.github.io/LOLBins-Reference`
+4. Your site will be available at `https://Ilias1988.github.io/LOLBins-Reference`
 
 ### Option 2: Local Development
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/LOLBins-Reference.git
+git clone https://github.com/Ilias1988/LOLBins-Reference.git
 cd LOLBins-Reference
 
 # Open in browser
