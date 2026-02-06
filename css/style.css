@@ -954,6 +954,37 @@ body {
     vertical-align: middle;
 }
 
+/* Social Links */
+.social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.social-link:hover {
+    color: var(--text-primary);
+    border-color: var(--accent-blue);
+    background-color: var(--bg-hover);
+}
+
+.social-link svg {
+    flex-shrink: 0;
+}
+
 .footer-bottom {
     max-width: 1400px;
     margin: 1.5rem auto 0;
