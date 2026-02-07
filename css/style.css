@@ -985,6 +985,128 @@ body {
     flex-shrink: 0;
 }
 
+/* ============================================
+   Resources Button (Header)
+   ============================================ */
+.resources-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.25rem;
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.resources-btn:hover {
+    border-color: var(--accent-purple);
+    color: var(--accent-purple);
+    background-color: rgba(163, 113, 247, 0.1);
+}
+
+/* ============================================
+   Resources Modal
+   ============================================ */
+.resources-modal {
+    max-width: 900px;
+}
+
+.resources-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 1rem;
+}
+
+.resource-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.resource-card:hover {
+    border-color: var(--accent-purple);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(163, 113, 247, 0.15);
+}
+
+.resource-icon {
+    font-size: 2.25rem;
+    flex-shrink: 0;
+    width: 50px;
+    text-align: center;
+}
+
+.resource-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.resource-info h3 {
+    color: var(--accent-blue);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.resource-tag {
+    display: inline-block;
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.7rem;
+    font-weight: 500;
+    background-color: rgba(163, 113, 247, 0.2);
+    color: var(--accent-purple);
+    margin-bottom: 0.4rem;
+}
+
+.resource-info p {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.resource-arrow {
+    color: var(--text-muted);
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    transition: var(--transition);
+}
+
+.resource-card:hover .resource-arrow {
+    color: var(--accent-purple);
+    transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+    .resources-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .resources-btn {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+    }
+}
+
 .footer-bottom {
     max-width: 1400px;
     margin: 1.5rem auto 0;

@@ -23,6 +23,9 @@
                 <input type="text" id="searchInput" placeholder="🔍 Search binaries..." autocomplete="off">
                 <button id="clearSearch" class="clear-btn" title="Clear search">✕</button>
             </div>
+            <button class="resources-btn" id="resourcesBtn" title="External Resources">
+                📚 Resources
+            </button>
         </div>
     </header>
 
@@ -173,6 +176,78 @@
             <p>© <script>document.write(new Date().getFullYear())</script> LOLBins Reference. For educational and authorized security testing purposes only.</p>
         </div>
     </footer>
+
+    <!-- Resources Modal -->
+    <div class="modal-overlay" id="resourcesModalOverlay">
+        <div class="modal resources-modal">
+            <div class="modal-header">
+                <div class="modal-title-container">
+                    <span class="modal-icon">📚</span>
+                    <h2 class="modal-title">External Resources</h2>
+                </div>
+                <button class="modal-close" id="resourcesModalClose">✕</button>
+            </div>
+            <div class="modal-body">
+                <p class="resources-subtitle">Curated collection of "Living off the Land" and security research projects</p>
+                <div class="resources-grid">
+                    <a href="https://www.loobins.io/" target="_blank" rel="noopener noreferrer" class="resource-card">
+                        <div class="resource-icon">🍎</div>
+                        <div class="resource-info">
+                            <h3>LOOBins</h3>
+                            <span class="resource-tag">macOS</span>
+                            <p>Living Off the Orchard: macOS binaries used by threat actors for post-exploitation.</p>
+                        </div>
+                        <span class="resource-arrow">→</span>
+                    </a>
+                    <a href="https://www.loldrivers.io/" target="_blank" rel="noopener noreferrer" class="resource-card">
+                        <div class="resource-icon">🚗</div>
+                        <div class="resource-info">
+                            <h3>LOLDrivers</h3>
+                            <span class="resource-tag">Windows</span>
+                            <p>Windows drivers used by adversaries to bypass security controls and gain kernel access.</p>
+                        </div>
+                        <span class="resource-arrow">→</span>
+                    </a>
+                    <a href="https://lots-project.com/" target="_blank" rel="noopener noreferrer" class="resource-card">
+                        <div class="resource-icon">🌐</div>
+                        <div class="resource-info">
+                            <h3>LOTS Project</h3>
+                            <span class="resource-tag">Web</span>
+                            <p>Living Off Trusted Sites: Popular legitimate domains abused for phishing and C2 communications.</p>
+                        </div>
+                        <span class="resource-arrow">→</span>
+                    </a>
+                    <a href="https://wtfbins.essh.moe/" target="_blank" rel="noopener noreferrer" class="resource-card">
+                        <div class="resource-icon">🤔</div>
+                        <div class="resource-info">
+                            <h3>WTFBins</h3>
+                            <span class="resource-tag">Analysis</span>
+                            <p>Benign applications that exhibit suspicious behaviors, complicating threat detection.</p>
+                        </div>
+                        <span class="resource-arrow">→</span>
+                    </a>
+                    <a href="https://hijacklibs.net/" target="_blank" rel="noopener noreferrer" class="resource-card">
+                        <div class="resource-icon">📚</div>
+                        <div class="resource-info">
+                            <h3>Hijack Libs</h3>
+                            <span class="resource-tag">DLL</span>
+                            <p>Curated list of DLL Hijacking candidates for privilege escalation and persistence.</p>
+                        </div>
+                        <span class="resource-arrow">→</span>
+                    </a>
+                    <a href="https://filesec.io/" target="_blank" rel="noopener noreferrer" class="resource-card">
+                        <div class="resource-icon">📎</div>
+                        <div class="resource-info">
+                            <h3>Filesec</h3>
+                            <span class="resource-tag">Files</span>
+                            <p>Comprehensive database of file extensions being weaponized by attackers.</p>
+                        </div>
+                        <span class="resource-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="js/data.js"></script>

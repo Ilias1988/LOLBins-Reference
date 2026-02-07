@@ -277,10 +277,38 @@ function setupEventListeners() {
         }
     });
     
+    // Resources Modal
+    const resourcesBtn = document.getElementById('resourcesBtn');
+    const resourcesModalOverlay = document.getElementById('resourcesModalOverlay');
+    const resourcesModalClose = document.getElementById('resourcesModalClose');
+    
+    if (resourcesBtn && resourcesModalOverlay) {
+        resourcesBtn.addEventListener('click', () => {
+            resourcesModalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        resourcesModalClose.addEventListener('click', () => {
+            resourcesModalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        resourcesModalOverlay.addEventListener('click', (e) => {
+            if (e.target === resourcesModalOverlay) {
+                resourcesModalOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+    
     // Keyboard shortcuts
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeModal();
+            if (resourcesModalOverlay) {
+                resourcesModalOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         }
         if (e.key === '/' && document.activeElement !== searchInput) {
             e.preventDefault();

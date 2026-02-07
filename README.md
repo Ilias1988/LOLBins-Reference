@@ -148,6 +148,19 @@ The Payload Builder feature allows you to customize IP and Port in all commands:
 - [GTFOBins](https://gtfobins.github.io/) - Unix binaries that can be exploited
 - [MITRE ATT&CK](https://attack.mitre.org/) - Adversary tactics and techniques
 
+## 🔗 External Resources
+
+A curated collection of related "Living off the Land" and security research projects, accessible via the **📚 Resources** button in the header:
+
+| Name | Platform | Description | URL |
+|------|----------|-------------|-----|
+| **LOOBins** | 🍎 macOS | Living Off the Orchard: macOS binaries used by threat actors | [loobins.io](https://www.loobins.io/) |
+| **LOLDrivers** | 🪟 Windows | Drivers used by adversaries to bypass security controls | [loldrivers.io](https://www.loldrivers.io/) |
+| **LOTS Project** | 🌐 Web | Living Off Trusted Sites: Domains abused for phishing/C2 | [lots-project.com](https://lots-project.com/) |
+| **WTFBins** | 🤔 Analysis | Benign apps that exhibit suspicious behaviors | [wtfbins.essh.moe](https://wtfbins.essh.moe/) |
+| **Hijack Libs** | 📚 DLL | Curated list of DLL Hijacking candidates | [hijacklibs.net](https://hijacklibs.net/) |
+| **Filesec** | 📎 Files | File extensions being weaponized by attackers | [filesec.io](https://filesec.io/) |
+
 ## 📁 Project Structure
 
 ```
