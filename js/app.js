@@ -136,43 +136,13 @@ function applyPayloadConfig() {
 }
 
 function replacePayloadPlaceholders() {
-    // IP patterns to replace
-    const ipPatterns = [
-        /ATTACKER_IP/gi,
-        /127\.0\.0\.1/g,
-        /0\.0\.0\.0/g,
-        /192\.168\.\d{1,3}\.\d{1,3}/g,
-        /10\.\d{1,3}\.\d{1,3}\.\d{1,3}/g,
-        /172\.\d{1,3}\.\d{1,3}\.\d{1,3}/g,
-        /<IP>/gi,
-        /<LHOST>/gi,
-        /\{LHOST\}/gi,
-        /\$LHOST/g,
-        /attacker\.com/gi,
-        /evil\.com/gi,
-        /example\.com/gi
-    ];
-    
-    // Port patterns to replace (only common attack ports)
-    const portPatterns = [
-        /\b4444\b/g,
-        /\b1337\b/g,
-        /\b8080\b/g,
-        /\b9001\b/g,
-        /\b443\b/g,
-        /<PORT>/gi,
-        /<LPORT>/gi,
-        /\{LPORT\}/gi,
-        /\$LPORT/g
-    ];
-    
     // Process Windows data
     LOLBinsData.windows = originalData.windows.map(item => {
         return {
             ...item,
             commands: item.commands.map(cmd => ({
                 ...cmd,
-                code: replaceInCommand(cmd.code, ipPatterns, portPatterns)
+                code: sanitizeCommand(cmd.code, payloadConfig.lhost, payloadConfig.lport)
             }))
         };
     });
@@ -183,24 +153,82 @@ function replacePayloadPlaceholders() {
             ...item,
             commands: item.commands.map(cmd => ({
                 ...cmd,
-                code: replaceInCommand(cmd.code, ipPatterns, portPatterns)
+                code: sanitizeCommand(cmd.code, payloadConfig.lhost, payloadConfig.lport)
             }))
         };
     });
 }
 
-function replaceInCommand(code, ipPatterns, portPatterns) {
-    let result = code;
+/**
+ * sanitizeCommand - Replace ALL IPs and Ports in a command with user values
+ * 
+ * Strategy:
+ * 1. First replace IP:PORT combos (e.g. 192.168.1.9:66 → userIP:userPort)
+ * 2. Then replace IP/PORT combos (e.g. /dev/tcp/192.168.1.10/54 → /dev/tcp/userIP/userPort)
+ * 3. Then replace standalone private/local IPs
+ * 4. Then replace text placeholders ({IP}, LHOST, RHOST, etc.)
+ * 5. Then replace standalone port placeholders
+ */
+function sanitizeCommand(cmd, userIP, userPort) {
+    if (!cmd) return '';
+    let result = cmd;
     
-    // Replace IP patterns
-    ipPatterns.forEach(pattern => {
-        result = result.replace(pattern, payloadConfig.lhost);
-    });
+    // === PHASE 1: Replace IP:PORT combos (colon separator) ===
+    // Matches: 192.168.x.x:PORT, 10.x.x.x:PORT, 172.16-31.x.x:PORT, 127.0.0.1:PORT, 0.0.0.0:PORT
+    result = result.replace(
+        /((?:192\.168|10\.\d{1,3}|172\.(?:1[6-9]|2\d|3[01]))\.\d{1,3}\.\d{1,3}):(\d{1,5})/g,
+        userIP + ':' + userPort
+    );
+    result = result.replace(
+        /(127\.0\.0\.1|0\.0\.0\.0):(\d{1,5})/g,
+        userIP + ':' + userPort
+    );
     
-    // Replace Port patterns
-    portPatterns.forEach(pattern => {
-        result = result.replace(pattern, payloadConfig.lport);
-    });
+    // === PHASE 2: Replace IP/PORT combos (slash separator, e.g. /dev/tcp/IP/PORT) ===
+    result = result.replace(
+        /(\/dev\/tcp\/)((?:192\.168|10\.\d{1,3}|172\.(?:1[6-9]|2\d|3[01]))\.\d{1,3}\.\d{1,3})\/(\d{1,5})/g,
+        '$1' + userIP + '/' + userPort
+    );
+    result = result.replace(
+        /(\/dev\/tcp\/)(127\.0\.0\.1|0\.0\.0\.0)\/(\d{1,5})/g,
+        '$1' + userIP + '/' + userPort
+    );
+    
+    // === PHASE 3: Replace standalone private/local IPs ===
+    result = result.replace(/192\.168\.\d{1,3}\.\d{1,3}/g, userIP);
+    result = result.replace(/10\.\d{1,3}\.\d{1,3}\.\d{1,3}/g, userIP);
+    result = result.replace(/172\.(?:1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3}/g, userIP);
+    result = result.replace(/127\.0\.0\.1/g, userIP);
+    result = result.replace(/0\.0\.0\.0/g, userIP);
+    
+    // === PHASE 4: Replace text placeholders (IP) ===
+    result = result.replace(/ATTACKER_IP/gi, userIP);
+    result = result.replace(/<IP>/gi, userIP);
+    result = result.replace(/<LHOST>/gi, userIP);
+    result = result.replace(/<RHOST>/gi, userIP);
+    result = result.replace(/\{IP\}/gi, userIP);
+    result = result.replace(/\{LHOST\}/gi, userIP);
+    result = result.replace(/\{RHOST\}/gi, userIP);
+    result = result.replace(/\$LHOST\b/g, userIP);
+    result = result.replace(/\$RHOST\b/g, userIP);
+    result = result.replace(/attacker\.com/gi, userIP);
+    result = result.replace(/evil\.com/gi, userIP);
+    result = result.replace(/example\.com/gi, userIP);
+    
+    // === PHASE 5: Replace text placeholders (Port) ===
+    result = result.replace(/<PORT>/gi, userPort);
+    result = result.replace(/<LPORT>/gi, userPort);
+    result = result.replace(/<RPORT>/gi, userPort);
+    result = result.replace(/\{PORT\}/gi, userPort);
+    result = result.replace(/\{LPORT\}/gi, userPort);
+    result = result.replace(/\{RPORT\}/gi, userPort);
+    result = result.replace(/\$LPORT\b/g, userPort);
+    result = result.replace(/\$RPORT\b/g, userPort);
+    
+    // === PHASE 6: Replace common hardcoded ports (standalone, word boundary) ===
+    result = result.replace(/\b4444\b/g, userPort);
+    result = result.replace(/\b1337\b/g, userPort);
+    result = result.replace(/\b9001\b/g, userPort);
     
     return result;
 }
