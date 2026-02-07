@@ -226,9 +226,14 @@ function sanitizeCommand(cmd, userIP, userPort) {
     result = result.replace(/\$RPORT\b/g, userPort);
     
     // === PHASE 6: Replace common hardcoded ports (standalone, word boundary) ===
+    result = result.replace(/\b12345\b/g, userPort);   // GTFOBins default
     result = result.replace(/\b4444\b/g, userPort);
     result = result.replace(/\b1337\b/g, userPort);
     result = result.replace(/\b9001\b/g, userPort);
+    result = result.replace(/\b443\b/g, userPort);
+    result = result.replace(/\b8000\b/g, userPort);
+    result = result.replace(/\b8080\b/g, userPort);
+    result = result.replace(/\b8888\b/g, userPort);
     
     return result;
 }
