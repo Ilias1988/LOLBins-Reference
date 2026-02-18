@@ -1,0 +1,8 @@
+# robots.txt for LOLBins Reference
+# https://ilias1988.github.io/LOLBins-Reference/
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ilias1988.github.io/LOLBins-Reference/sitemap.xml
