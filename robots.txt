@@ -1,8 +1,8 @@
 # robots.txt for LOLBins Reference
-# https://ilias1988.github.io/LOLBins-Reference/
+# https://livingofftheland.dev/
 
 User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://ilias1988.github.io/LOLBins-Reference/sitemap.xml
+Sitemap: https://livingofftheland.dev/sitemap.xml
