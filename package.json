@@ -1,0 +1,12 @@
+{
+  "name": "lolbins-reference",
+  "private": true,
+  "version": "1.0.0",
+  "description": "LOLBins Reference - Living off the Land Binaries for Windows & Linux",
+  "homepage": "https://livingofftheland.dev",
+  "scripts": {
+    "build": "node build.js",
+    "prebuild": "echo Pre-rendering cards into index.html..."
+  },
+  "author": "Ilias Georgopoulos"
+}
